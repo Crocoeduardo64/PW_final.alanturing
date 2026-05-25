@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Galería - Alan Turing</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        .contenedor-formulario {
+            margin: 50px 10%;
+        }
+
+        .formulario-titulo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #000;
+            border-bottom: 5px solid #00d4ff;
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 30px;
+        }
+
+        .formulario-wrapper {
+            border: 10px solid #000000;
+            box-shadow: 15px 15px 0px #00d4ff;
+            background: #fff;
+        }
+
+        #google-form {
+            width: 100%;
+            height: 700px;
+            border: none;
+            display: block;
+        }
+
+        #gracias {
+            display: none;
+            text-align: center;
+            padding: 80px 40px;
+            background: #ffffff;
+        }
+
+        #gracias h2 {
+            font-size: 32px;
+            color: #000;
+            text-transform: uppercase;
+            border-bottom: 5px solid #00d4ff;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        #gracias .icono { font-size: 60px; margin-bottom: 20px; }
+        #gracias p { font-size: 18px; color: #333; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Inicio</a> |
+        <a href="html2.html">Orígenes y Teoría</a> |
+        <a href="html3.html">Guerra y Legado</a> |
+        <a href="galeria.html">Galería</a>
+    </nav>
+
+    <header>
+        <h1 style="color:#ffffff; margin:0; padding: 20px 0;">Galería de Alan Turing</h1>
+    </header>
+
+    <main>
+        <div class="contenedor-botones">
+            <button class="boton-galeria" onclick="actualizarGaleria(1)">DOCUMENTOS DIGITALES</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(2)">APLICACIONES INFORMATICAS</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(3)">MANTENIMIENTO EN REDES Y COMPUTO</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(4)">COMUNIDADES VIRTUALES</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(5)">PROGRAMACION</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(6)">SISTEMAS</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(7)">DISEÑO DIGITAL</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(8)">PAGINAS WEB</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(9)">ORDINARIO</button>
+            <button class="boton-galeria" onclick="actualizarGaleria(10)">EXTRAORDINARIO</button>
+        </div>
+
+        <div id="visor" style="display: none;">
+            <div class="visor-contenido">
+                <img id="foto-galeria" src="" alt="Imagen de galería" onclick="abrirLightbox()" title="Clic para ampliar">
+                <div class="texto-galeria">
+                    <h3 id="titulo-galeria"></h3>
+                    <p id="descripcion-galeria"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULARIO -->
+        <div class="contenedor-formulario">
+            <div style="text-align:center;">
+                <span class="formulario-titulo">Evaluación — Capacitación TICS</span>
+            </div>
+            <div class="formulario-wrapper">
+                <div id="gracias">
+                    <div class="icono">:)</div>
+                    <h2>¡Gracias por tu respuesta!</h2>
+                    <p>Tu formulario fue enviado correctamente.</p>
+                </div>
+                <iframe
+                    id="google-form"
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSedR9INNEo7Pjdpi6fMjSPl1lZQZyOOgmmOslh6vb9fRcfvrw/viewform?embedded=true"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0">
+                    Cargando formulario...
+                </iframe>
+            </div>
+        </div>
+    </main>
+
+    <div id="lightbox" onclick="cerrarLightbox()">
+        <span id="lightbox-cerrar">&times;</span>
+        <img id="lightbox-img" src="" alt="Imagen ampliada">
+        <p id="lightbox-titulo"></p>
+    </div>
+
+    <footer>
+        <p>&copy; Alan Turing — Galería Interactiva</p>
+    </footer>
+
+    <script>
+        const contenido = {
+            1: { t: "PRACTICA: BIBLIOGRAFIA Y URLS", d: "En esta practica se desarrollo el como implementar libros dentro de el sistema de WORD.", i: "IMAGENES/documentos.png" },
+            2: { t: "PRACTICA: SISTEMA DE REGISTRO", d: "La practica consiste en utilizar MITT APP INVENTOR y lograr un sistema exitoso para registrar una cuenta e iniciar sesioon", i: "IMAGENES/aplicaciones.png" },
+            3: { t: "REPORTE DE LABORATORIO", d: "En esta practica se realizo un reporte de laboratorio para ver como realizar una limpieza completa en una computadora", i: "IMAGENES/mantenimiento.jpg" },
+            4: { t: "PRACTICA: IDENTIDAD DIGITAL", d: "Se explico que es una comunidad virtual: son grupos de personas con intereses, necesidades o pasiones comunes que interactúan e intercambian información a través de internet, en este caso se realizo con el artista de regional mexicano JUNIOR H", i: "IMAGENES/comunidades.png" },
+            5: { t: "PRACTICA: CASA DE CAMBIO", d: "En esta ocacion se utilizo el programa de PSEINT, esto con el fin de crear un diaframa de flujo el cual desarrollara una casa de cambio funcional", i: "IMAGENES/programacion.png" },
+            6: { t: "AVANCE DE PROYECTO:", d: "En esta ocacion tuvimos como proyecto crear un sistema informatico, junto sus casos de uso y todo lo que conlleva crear uno, ademas de sentar las bases para la programacion", i: "IMAGENES/caca.png" },
+            7: { t: "DISEÑO DE REVISTA", d: "En esta ocacion intentamos replicar el como se veria una revista sobre algun trabajo deseado, en el ejemplo se ve la PALEONTOLOGIA", i: "IMAGENES/diseno.png" },
+            8: { t: "AVANCE DE PROYECTO", d: "La imagen muestra nuestro primer avance con todo lo aprendido en el lenguaje de la programacion, generando una pagina web sobre la vida de Turing", i: "IMAGENES/paginas.png" },
+            9: { t: "ORDINARIO", d: "En esta imagen se adjunta el ordinario de la asignatura DOCUMENTOS DIGITALES, el cual consistia en hacer un documentos sobre tres estados de Mexico", i: "IMAGENES/ordi.jpg" },
+            10: { t: "EXTRAORDINARIO", d: "Este Examen extraordinario, consistia en traer en un USB una imagen virtual, para correr un sistema operativo dentro de otro en VIRTUAL BOX", i: "IMAGENES/extra.png" }
+        };
+
+        let activeId = null;
+
+        function abrirLightbox() {
+            const src = document.getElementById('foto-galeria').src;
+            const titulo = document.getElementById('titulo-galeria').innerText;
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-titulo').innerText = titulo;
+            document.getElementById('lightbox').classList.add('activo');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarLightbox() {
+            document.getElementById('lightbox').classList.remove('activo');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') cerrarLightbox();
+        });
+
+        function actualizarGaleria(id) {
+            const visor = document.getElementById('visor');
+            const botones = document.querySelectorAll('.boton-galeria');
+
+            if (activeId === id) {
+                visor.style.display = 'none';
+                botones[id - 1].classList.remove('activo');
+                activeId = null;
+                return;
+            }
+
+            if (activeId !== null) {
+                botones[activeId - 1].classList.remove('activo');
+            }
+
+            const item = contenido[id];
+            document.getElementById('foto-galeria').src = item.i;
+            document.getElementById('titulo-galeria').innerText = item.t;
+            document.getElementById('descripcion-galeria').innerText = item.d;
+
+            visor.style.display = 'block';
+            botones[id - 1].classList.add('activo');
+            activeId = id;
+
+            visor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Detectar envío del formulario de Google
+        const iframe = document.getElementById('google-form');
+        let primerarCarga = true; // Ignorar el primer load (carga inicial)
+
+        iframe.addEventListener('load', function () {
+            if (primerarCarga) {
+                primerarCarga = false; // La primera carga es solo el formulario abriéndose
+                return;
+            }
+            // Segunda carga = Google redirigió tras envío
+            mostrarGracias();
+        });
+
+        function mostrarGracias() {
+            document.getElementById('google-form').style.display = 'none';
+            document.getElementById('gracias').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
